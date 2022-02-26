@@ -1,1 +1,1 @@
-# Seker Factory DAO NFT Minting Domain
+# Seker Factory Ukraine NFT Mission
