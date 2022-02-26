@@ -68,12 +68,41 @@ describe("Ukraine NFT", async () => {
       );
     });
 
-    // it("can withdraw", async () => {
-    //   const { ukraine } = await baseSetup();
-    // });
+    it("owner can update uri", async () => {
+      const { ukraine } = await baseSetup();
+      await ukraine.setURI("test");
+      expect(await ukraine.tokenURI(0)).to.equal("test0");
+    });
 
-    // it("only owner can withdraw", async () => {
-    //   const { ukraine } = await baseSetup();
-    // });
+    it("only owner can update uri", async () => {
+      const { ukraine } = await baseSetup();
+      await expect(ukraine.connect(user2).setURI("test")).to.be.revertedWith(
+        "Ownable: caller is not the owner"
+      );
+    });
+
+    it("can withdraw", async () => {
+      const { ukraine } = await baseSetup();
+      const etherValue = ethers.utils.parseEther("0.05");
+      await ukraine.mint(1, {value: etherValue});
+      const provider = waffle.provider;
+      let bal = await provider.getBalance(ukraine.address)
+      await expect(bal).to.equal("100000000000000000");
+      let bal2 = await provider.getBalance(user1.address)
+      await expect(bal).to.equal("100000000000000000");
+      await expect(bal2).to.equal("9999878265793846494536");
+      await ukraine.withdraw(user1.address)
+      bal = await provider.getBalance(ukraine.address)
+      await expect(bal).to.equal("0");
+      bal2 = await provider.getBalance(user1.address)
+      await expect(bal2).to.equal("9999978218188598820514");
+    });
+
+    it("only owner can withdraw", async () => {
+      const { ukraine } = await baseSetup();
+      await expect(ukraine.connect(user2).withdraw(user2.address)).to.be.revertedWith(
+        "Ownable: caller is not the owner"
+      );
+    });
   });
 });

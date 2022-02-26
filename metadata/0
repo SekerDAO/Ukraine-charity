@@ -1,10 +1,10 @@
 {
-    "name": "Test Ukraine",
+    "name": "Seeds",
     "description": "Test Desc",
     "attributes": [
         {
             "trait_type": "Artist",
-            "trait_value": "Sasha"
+            "trait_value": "Sasha Ivanov"
         },
         {
             "trait_type": "Edition Number",
