@@ -1,0 +1,15 @@
+{
+    "name": "Test Ukraine",
+    "description": "Test Desc",
+    "attributes": [
+        {
+            "trait_type": "Artist",
+            "trait_value": "Sasha"
+        },
+        {
+            "trait_type": "Edition Number",
+            "trait_value": "0"
+        }
+    ],
+    "image": "https://gateway.pinata.cloud/ipfs/QmVzFagN1c27pHiqce3XPpvpex3fKsEheQpcLQ5pruXBqM"
+}
