@@ -8,7 +8,7 @@ const ZeroAddress = "0x0000000000000000000000000000000000000000";
 const FirstAddress = "0x0000000000000000000000000000000000000001";
 
 describe("Ukraine NFT", async () => {
-  const [user1] = waffle.provider.getWallets();
+  const [user1, user2] = waffle.provider.getWallets();
 
   const baseSetup = deployments.createFixture(async () => {
     await deployments.fixture();
@@ -53,13 +53,20 @@ describe("Ukraine NFT", async () => {
       expect(await ukraine.ownerOf(2)).to.equal(user1.address);
     });
 
-    // it("can't purchase 1 with incorrect value", async () => {
-    //   const { ukraine } = await baseSetup();
-    // });
+    it("can't purchase 1 with incorrect value", async () => {
+      const { ukraine } = await baseSetup();
+      const etherValue = ethers.utils.parseEther("0.04");
+      await expect(ukraine.mint(1, {value: etherValue})).to.be.revertedWith(
+        "Not enough eth"
+      );
+    });
 
-    // it("only owner can update editions", async () => {
-    //   const { ukraine } = await baseSetup();
-    // });
+    it("only owner can update editions", async () => {
+      const { ukraine } = await baseSetup();
+      await expect(ukraine.connect(user2).updateEditions(200)).to.be.revertedWith(
+        "Ownable: caller is not the owner"
+      );
+    });
 
     // it("can withdraw", async () => {
     //   const { ukraine } = await baseSetup();
