@@ -90,12 +90,12 @@ describe("Ukraine NFT", async () => {
       await expect(bal).to.equal("100000000000000000");
       let bal2 = await provider.getBalance(user1.address)
       await expect(bal).to.equal("100000000000000000");
-      await expect(bal2).to.equal("9999878265793846494536");
+      await expect(bal2).to.equal("9999878335329381708090");
       await ukraine.withdraw(user1.address)
       bal = await provider.getBalance(ukraine.address)
       await expect(bal).to.equal("0");
       bal2 = await provider.getBalance(user1.address)
-      await expect(bal2).to.equal("9999978218188598820514");
+      await expect(bal2).to.equal("9999978287730370627774");
     });
 
     it("only owner can withdraw", async () => {

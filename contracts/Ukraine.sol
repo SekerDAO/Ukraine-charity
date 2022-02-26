@@ -12,7 +12,8 @@ contract Ukraine is ERC721, Ownable, ReentrancyGuard {
 
     uint256 public totalEditions = 0;
     bool public canUpdateEditions = true;
-    string public _uri = "https://gateway.pinata.cloud/ipfs/QmSzprezZKuH9W3i9EFscqYc8W9hfQ3YQPzgYRbKA1WX7m/";
+    string public _uri =
+        "https://gateway.pinata.cloud/ipfs/QmSzprezZKuH9W3i9EFscqYc8W9hfQ3YQPzgYRbKA1WX7m/";
     uint256 public price = 0.05 ether;
 
     constructor() ERC721("Ukraine", "UKR") {
@@ -31,9 +32,12 @@ contract Ukraine is ERC721, Ownable, ReentrancyGuard {
     }
 
     function mint(uint256 _amount) public payable {
-        require(Counters.current(_tokenIds) <= totalEditions, "minting has reached its max");
+        require(
+            Counters.current(_tokenIds) <= totalEditions,
+            "minting has reached its max"
+        );
         require(msg.value >= price * _amount, "Not enough eth");
-        for(uint256 i; i <= _amount; i++) {
+        for (uint256 i; i <= _amount - 1; i++) {
             uint256 newNFT = _tokenIds.current();
             _safeMint(msg.sender, newNFT);
             _tokenIds.increment();
@@ -60,7 +64,10 @@ contract Ukraine is ERC721, Ownable, ReentrancyGuard {
         nonReentrant
         onlyOwner
     {
-        require(withdrawAddress != address(0), "Withdraw address cannot be zero");
+        require(
+            withdrawAddress != address(0),
+            "Withdraw address cannot be zero"
+        );
         require(address(this).balance >= 0, "Not enough eth");
         payable(withdrawAddress).transfer(address(this).balance);
     }
