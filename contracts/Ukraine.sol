@@ -12,6 +12,7 @@ contract Ukraine is ERC721, Ownable, ReentrancyGuard {
 
     uint256 public totalEditions = 0;
     bool public canUpdateEditions = true;
+    bool public canUpdateURI = true;
     string public _uri =
         "https://gateway.pinata.cloud/ipfs/QmQPzQ4KgcUdfHgNnVmNUdDrFLp5wb6QEkkNk5vTwUPHZ9/";
     uint256 public price = 0.05 ether;
@@ -54,7 +55,13 @@ contract Ukraine is ERC721, Ownable, ReentrancyGuard {
     }
 
     function setURI(string memory newuri) public onlyOwner {
+        require(canUpdateURI == true, "can no longer update URI");
         _uri = newuri;
+    }
+
+    function burnURIUpdates() public onlyOwner {
+        require(canUpdateURI == true, "burn URI already happened");
+        canUpdateURI = false;
     }
 
     // Withdraw
