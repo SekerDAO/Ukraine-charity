@@ -14,7 +14,7 @@ for(var i=0; i<=11; i++) {
 	            "value": i.toString()
 	        }
 	    ],
-	    "image": "https://gateway.pinata.cloud/ipfs/QmVzFagN1c27pHiqce3XPpvpex3fKsEheQpcLQ5pruXBqM"
+	    "image": "https://gateway.pinata.cloud/ipfs/QmPXED9pDo8dh7Y2CyKdRNtw3oRYebZLCNurK7wEwRez6c"
 	}
 
 	var dictstring = JSON.stringify(dict);

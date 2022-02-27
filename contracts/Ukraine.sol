@@ -14,11 +14,11 @@ contract Ukraine is ERC721, Ownable, ReentrancyGuard {
     bool public canUpdateEditions = true;
     bool public canUpdateURI = true;
     string public _uri =
-        "https://gateway.pinata.cloud/ipfs/QmQPzQ4KgcUdfHgNnVmNUdDrFLp5wb6QEkkNk5vTwUPHZ9/";
+        "https://gateway.pinata.cloud/ipfs/QmdQP3QiE1tuh7KnVBe4wCBPky3QQXgPXWUfkAB82dXf1p/";
     uint256 public price = 0.05 ether;
 
     constructor() ERC721("Seeds", "UKR") {
-        totalEditions = 100;
+        totalEditions = 10000;
     }
 
     function updateEditions(uint256 newMax) public onlyOwner {
