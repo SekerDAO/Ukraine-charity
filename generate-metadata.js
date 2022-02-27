@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-for(var i=0; i<=11; i++) {
+for(var i=0; i<=10000; i++) {
 	var dict = {
 	    "name": "Seeds",
 	    "description": "Test Desc",
