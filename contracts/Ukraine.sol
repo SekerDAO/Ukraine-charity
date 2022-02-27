@@ -76,6 +76,7 @@ contract Ukraine is ERC721, Ownable, ReentrancyGuard {
             "Withdraw address cannot be zero"
         );
         require(address(this).balance >= 0, "Not enough eth");
-        payable(withdrawAddress).transfer(address(this).balance);
+        (bool sent, bytes memory data) = withdrawAddress.call{value:address(this).balance}("");
+        require(sent, "Failed to send Ether");
     }
 }
